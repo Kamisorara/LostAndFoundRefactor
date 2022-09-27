@@ -1,0 +1,46 @@
+spring:
+  application:
+    name: portal
+  profiles:
+    active: dev
+  #swagger 配置
+  mvc:
+    pathmatch:
+      matching-strategy: ant_path_matcher
+  #配置java mail
+  mail:
+    host: smtp.163.com
+    username: kamisora2020@163.com
+    password:
+    port: 465
+    default-encoding: utf-8
+    properties:
+      mail:
+        smtp:
+          starttls:
+            enable: true
+            required: true
+          ssl:
+            enable: true
+
+#配置mybatis-plus信息
+mybatis-plus:
+  #  global-config:
+  #    db-config:
+  #       id生成策略 auto为数据库自增
+  #     id-type: auto
+  mapper-locations: classpath*:/mapper/**/*.xml
+
+
+#spring Security 允许匿名访问地址
+secure:
+  ignored:
+    urls: #安全路径白名单
+      - /sso/**
+      - /swagger-ui.html
+      - /swagger-ui/**
+      - /swagger-resources/**
+      - /v2/api-docs
+      - /v3/api-docs
+      - /webjars/**
+
