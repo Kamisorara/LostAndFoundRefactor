@@ -6,4 +6,9 @@
         FROM `sys_user` su
         WHERE su.user_name = #{userName};
     </select>
+    <select id="selectUserIdByUserName" resultType="java.lang.Long">
+        SELECT su.id
+        FROM sys_user su
+        WHERE su.user_name = #{userName};
+    </select>
 </mapper>

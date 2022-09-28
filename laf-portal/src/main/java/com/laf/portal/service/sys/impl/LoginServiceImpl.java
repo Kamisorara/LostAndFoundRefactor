@@ -2,13 +2,17 @@ package com.laf.portal.service.sys.impl;
 
 
 import com.laf.common.constant.RabbitMqConstant;
+import com.laf.common.entity.sys.Rank;
 import com.laf.common.entity.sys.User;
 import com.laf.common.entity.sys.UserLoginLog;
+import com.laf.common.entity.sys.UserRole;
 import com.laf.framwork.exception.Asserts;
 import com.laf.framwork.util.JwtUtil;
 import com.laf.framwork.util.RedisCache;
 import com.laf.portal.dao.UserLoginLogMapper;
 import com.laf.portal.dao.UserMapper;
+import com.laf.portal.dao.UserRoleMapper;
+import com.laf.portal.dao.rankMapper;
 import com.laf.portal.service.UserService;
 import com.laf.portal.service.sys.LoginService;
 import com.laf.portal.service.sys.VerifyService;
@@ -54,6 +58,12 @@ public class LoginServiceImpl implements LoginService {
 
     @Resource
     private RabbitTemplate rabbitTemplate;
+
+    @Autowired
+    private UserRoleMapper userRoleMapper;
+
+    @Autowired
+    private rankMapper rankMapper;
 
 
     @Override
@@ -110,6 +120,17 @@ public class LoginServiceImpl implements LoginService {
                 user.setPassword(passwordEncoder.encode(password));
                 user.setEmail(emailAddr);
                 userMapper.insert(user);
+                //由于生成的id是经雪花算法生成的id 所以id还需要再从数据库中获取
+                UserRole userRole = new UserRole();
+                Long userIdInDataBase = userMapper.selectUserIdByUserName(userName);
+                userRole.setUserId(userIdInDataBase);
+                userRole.setRoleId(1L);//默认注册用户默认附上普通用户角色
+                userRoleMapper.insert(userRole);
+                //在注册成功后在rank表中添加此用户
+                Rank rank = new Rank();
+                rank.setUserId(userIdInDataBase);
+                rank.setHelpTimes(0);
+                rankMapper.insert(rank);
                 //使用rabbitMQ发送注册成功邮件信息
                 rabbitTemplate.convertAndSend(RabbitMqConstant.EXCHANGE, RabbitMqConstant.EMAIL_ROUTING_KEY, emailAddr);
             } catch (Exception e) {

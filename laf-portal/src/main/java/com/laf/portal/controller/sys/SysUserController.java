@@ -1,6 +1,7 @@
 package com.laf.portal.controller.sys;
 
 
+import com.laf.common.constant.RabbitMqConstant;
 import com.laf.framwork.api.CommonResult;
 import com.laf.portal.service.sys.EmailService;
 import com.laf.portal.service.sys.LoginService;
@@ -65,9 +66,8 @@ public class SysUserController {
     @ApiOperation(value = "发送注册邮件信息验证码", tags = "开放权限")
     @RequestMapping(value = "/verify-code-mail", method = RequestMethod.POST)
     public CommonResult getRegisterVerifyCode(@RequestParam("emailAddr") String emailAddr) {
-        emailService.sendVerifyCode(emailAddr);
+        rabbitTemplate.convertAndSend(RabbitMqConstant.EXCHANGE,RabbitMqConstant.REGISTER_VERIFY_CODE_EMAIL_KEY, emailAddr);
         return CommonResult.success("邮件发送成功");
     }
-
 
 }

@@ -7,7 +7,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 /**
- * (sys_menu)表实体类
+ * (Board)表实体类
  *
  * @author Kamisora
  * @since 2022-06-25 10:40:38
@@ -16,16 +16,17 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@TableName(value= "sys_menu")
-public class Menu {
-    //详细权限对应id
+@TableName(value= "sys_board")
+public class Board {
+    //公告板对应id
+
     @JsonSerialize(using = ToStringSerializer.class)
     private Long id;
-    //权限名
-    private String menuName;
-    //权限表示(例如sys:common:user)
-    private String perms;
-    //(0启用，1禁用)
+    //公告板信息
+    private String message;
+    //公告板需要跳转的url
+    private String boardUrl;
+    //显示状态(0不显示，1显示)
     private String status;
 
 }

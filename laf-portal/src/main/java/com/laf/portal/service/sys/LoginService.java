@@ -1,5 +1,7 @@
 package com.laf.portal.service.sys;
 
+import org.springframework.transaction.annotation.Transactional;
+
 /**
  * 用户登录注册Service
  */
@@ -12,6 +14,7 @@ public interface LoginService {
     void insertLoginLog(Long userId);
 
     //用户注册
+    @Transactional
     String register(String userName,
                     String password,
                     String passwordRepeat,

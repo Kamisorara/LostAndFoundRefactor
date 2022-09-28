@@ -6,8 +6,9 @@ import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
 /**
- * (sys_menu)表实体类
+ * (Message)表实体类
  *
  * @author Kamisora
  * @since 2022-06-25 10:40:38
@@ -16,17 +17,20 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@TableName(value= "sys_menu")
-public class Menu {
-    //详细权限对应id
+
+@TableName(value = "sys_message")
+public class Message {
+    //用户留言板对应id
     @JsonSerialize(using = ToStringSerializer.class)
     private Long id;
-    //权限名
-    private String menuName;
-    //权限表示(例如sys:common:user)
-    private String perms;
-    //(0启用，1禁用)
-    private String status;
+    //用户留言信息
+    private String message;
+    //留下留言的用户id
+    @JsonSerialize(using = ToStringSerializer.class)
+    private Long leaveUserid;
+    //留给用户的id
+    @JsonSerialize(using = ToStringSerializer.class)
+    private Long toUserid;
 
 }
 

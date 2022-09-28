@@ -21,7 +21,7 @@ public class GlobalExceptionHandler {
     @ResponseBody
     @ExceptionHandler(value = RuntimeException.class)
     public CommonResult globalHandler(RuntimeException exception) {
-        return CommonResult.failed("{ 全局程序异常 }" + exception.getMessage());
+        return CommonResult.failed("{ 后端程序异常 }" + exception.getMessage());
     }
 
     /**

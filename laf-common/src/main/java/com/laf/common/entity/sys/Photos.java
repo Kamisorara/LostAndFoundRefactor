@@ -7,7 +7,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 /**
- * (sys_menu)表实体类
+ * (Photos)表实体类
  *
  * @author Kamisora
  * @since 2022-06-25 10:40:38
@@ -16,16 +16,17 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@TableName(value= "sys_menu")
-public class Menu {
-    //详细权限对应id
+@TableName(value= "sys_photos")
+public class Photos {
+    //用户个性背景图片url
     @JsonSerialize(using = ToStringSerializer.class)
     private Long id;
-    //权限名
-    private String menuName;
-    //权限表示(例如sys:common:user)
-    private String perms;
-    //(0启用，1禁用)
+    //url地址
+    private String photoUrl;
+    //对应用户id
+    @JsonSerialize(using = ToStringSerializer.class)
+    private Long userId;
+    //启用状态(0启用，1禁用)
     private String status;
 
 }

@@ -46,6 +46,8 @@ public class EmailServiceImpl implements EmailService {
 
     }
 
+    @RabbitListener(queues = {RabbitMqConstant.REGISTER_VERIFY_CODE_EMAIL})
+    @RabbitHandler
     @Override
     public void sendVerifyCode(String mail) {
         try {
