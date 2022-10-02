@@ -1,13 +1,12 @@
 package com.laf.framwork.config;
 
 
-import com.alibaba.fastjson.support.spring.FastJsonRedisSerializer;
+import com.laf.framwork.util.FastJsonRedisSerializer;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.redis.connection.RedisConnectionFactory;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.serializer.StringRedisSerializer;
-
 /**
  * redis配置
  */

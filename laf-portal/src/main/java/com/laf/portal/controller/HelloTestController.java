@@ -23,7 +23,7 @@ public class HelloTestController {
     private static final Logger logger = LoggerFactory.getLogger(HelloTestController.class);
 
     @RequestMapping(value = "/hello", method = RequestMethod.GET)
-    @PreAuthorize("@ka.hasAuthority('sys:super:admin')")
+    @PreAuthorize("@ka.hasAuthority('sys:common:admin')")
     public String hello() {
         //测试登录获取ip地址
         ServletRequestAttributes attributes = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();

@@ -18,11 +18,11 @@ import org.springframework.web.bind.annotation.ResponseBody;
 public class GlobalExceptionHandler {
 
     //全局异常处理
-    @ResponseBody
-    @ExceptionHandler(value = RuntimeException.class)
-    public CommonResult globalHandler(RuntimeException exception) {
-        return CommonResult.failed("{ 后端程序异常 }" + exception.getMessage());
-    }
+//    @ResponseBody
+//    @ExceptionHandler(value = RuntimeException.class)
+//    public CommonResult globalHandler(RuntimeException exception) {
+//        return CommonResult.failed("{ 后端程序异常 }" + exception.getMessage());
+//    }
 
     /**
      * 自定义接口异常

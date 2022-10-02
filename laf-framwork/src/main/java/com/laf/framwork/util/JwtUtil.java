@@ -103,7 +103,7 @@ public class JwtUtil {
     }
 
     /**
-     * 解析
+     * 解析 从token中获取JWT中的负载
      *
      * @param jwt
      * @return

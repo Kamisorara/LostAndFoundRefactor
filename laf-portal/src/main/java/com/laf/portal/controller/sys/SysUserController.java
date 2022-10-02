@@ -3,7 +3,6 @@ package com.laf.portal.controller.sys;
 
 import com.laf.common.constant.RabbitMqConstant;
 import com.laf.framwork.api.CommonResult;
-import com.laf.portal.service.sys.EmailService;
 import com.laf.portal.service.sys.LoginService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -16,7 +15,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import javax.annotation.Resource;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -25,14 +23,9 @@ import java.util.Map;
 @Api(tags = "SysUserController用户接口", description = "用户登录注册相关接口，匿名访问")
 public class SysUserController {
 
-
     private static final Logger logger = LoggerFactory.getLogger(SysUserController.class);
     @Autowired
     private LoginService loginService;
-
-    @Autowired
-    private EmailService emailService;
-
 
     @Autowired
     private RabbitTemplate rabbitTemplate;
@@ -69,5 +62,7 @@ public class SysUserController {
         rabbitTemplate.convertAndSend(RabbitMqConstant.EXCHANGE,RabbitMqConstant.REGISTER_VERIFY_CODE_EMAIL_KEY, emailAddr);
         return CommonResult.success("邮件发送成功");
     }
+
+
 
 }
