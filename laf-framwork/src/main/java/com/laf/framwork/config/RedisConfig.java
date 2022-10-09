@@ -16,9 +16,11 @@ public class RedisConfig {
     @Bean
     @SuppressWarnings(value = {"unchecked", "rawtypes"})
     public RedisTemplate<Object, Object> redisTemplate(RedisConnectionFactory connectionFactory) {
+        //创建 template
         RedisTemplate<Object, Object> template = new RedisTemplate<>();
+        //创建连接工厂
         template.setConnectionFactory(connectionFactory);
-
+        //创建序列化功率（这边是用FastJson）
         FastJsonRedisSerializer serializer = new FastJsonRedisSerializer(Object.class);
 
         // 使用StringRedisSerializer来序列化和反序列化redis的key值
